@@ -8,11 +8,7 @@ public class GrowupspringskillsApplication {
 
 	public static void main(String[] args) {
 
-
 		SpringApplication.run(GrowupspringskillsApplication.class, args);
-
-		System.out.println("Wow");
-
 
 	}
 }
