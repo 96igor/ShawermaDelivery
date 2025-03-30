@@ -7,11 +7,11 @@ import com.igorjava.shawarmadelivery.domain.repo.OrderRepo;
 
 import java.util.List;
 
-public class OrderInterator {
+public class OrderInteractor {
 
     private final OrderRepo repo;
 
-    public OrderInterator(OrderRepo repo) {
+    public OrderInteractor(OrderRepo repo) {
         this.repo = repo;
     }
 
