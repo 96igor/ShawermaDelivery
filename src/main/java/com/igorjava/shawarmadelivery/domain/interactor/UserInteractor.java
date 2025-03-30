@@ -1,4 +1,4 @@
-package com.igorjava.shawarmadelivery.domain.service;
+package com.igorjava.shawarmadelivery.domain.interactor;
 
 import com.igorjava.shawarmadelivery.domain.model.User;
 import com.igorjava.shawarmadelivery.domain.repo.UserRepo;
