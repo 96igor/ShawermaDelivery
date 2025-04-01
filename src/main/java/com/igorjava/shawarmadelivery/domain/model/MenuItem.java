@@ -6,6 +6,6 @@ import lombok.Data;
 public class MenuItem {
     private Long id;
     private String name;
-    private MenuItem menuItem;
+    private MenuSection menuSection;
     private Integer price;
 }

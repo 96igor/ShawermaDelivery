@@ -11,7 +11,7 @@ public class UserInteractor {
         this.repo=userRepo;
     }
 
-    public User saveUser(User user){
+    public User createUser(User user){
         return repo.saveUser(user);
     }
 
