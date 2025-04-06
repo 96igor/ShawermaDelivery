@@ -2,10 +2,12 @@ package com.igorjava.shawarmadelivery.domain.interactor;
 
 import com.igorjava.shawarmadelivery.domain.model.User;
 import com.igorjava.shawarmadelivery.domain.repo.UserRepo;
+import lombok.Setter;
 
+@Setter
 public class UserInteractor {
 
-    private final UserRepo repo;
+    private UserRepo repo;
 
     public UserInteractor(UserRepo userRepo) {
         this.repo=userRepo;

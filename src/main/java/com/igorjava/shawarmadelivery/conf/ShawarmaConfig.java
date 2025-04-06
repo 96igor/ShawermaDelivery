@@ -14,9 +14,9 @@ public class ShawarmaConfig {
         return new UserRepoImpl();
     }
 
-    @Bean
-    public UserService userService(UserRepo userRepo){
-        return new UserService(userRepo);
-    }
+//    @Bean
+//    public UserService userService(UserRepo userRepo){
+//        return new UserService(userRepo);
+//    }
 
 }
