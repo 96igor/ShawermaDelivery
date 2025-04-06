@@ -13,11 +13,13 @@ public class UserRepoImpl implements UserRepo {
     @Override
     public User saveUser(User user) {
         users.add(user);
+        System.out.println("User created!");
         return user;
     }
 
     @Override
     public void deleteUser(User user) {
+        System.out.println("User deleted!");
         users.remove(user);
     }
 
