@@ -17,8 +17,13 @@ public class ShawarmaConfig {
     }
 
     @Bean
+    public UserService userService(){
+        return new UserService();
+    }
+
+    @Bean
     public UserController userController(){
-        return new UserController(new UserService());
+        return new UserController(userService());
     }
 
 

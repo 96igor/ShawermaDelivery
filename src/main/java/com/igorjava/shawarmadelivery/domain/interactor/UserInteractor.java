@@ -4,10 +4,14 @@ import com.igorjava.shawarmadelivery.domain.model.User;
 import com.igorjava.shawarmadelivery.domain.repo.UserRepo;
 import lombok.Setter;
 
-@Setter
+//@Setter
 public class UserInteractor {
 
     private UserRepo repo;
+
+    public void setRepo(UserRepo repo) {
+        this.repo = repo;
+    }
 
     public UserInteractor(UserRepo userRepo) {
         this.repo=userRepo;
