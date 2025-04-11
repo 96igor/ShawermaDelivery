@@ -2,6 +2,9 @@ package com.igorjava.shawarmadelivery.domain.model;
 
 import lombok.Data;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 //@Data
 public class User {
     private Long id;
@@ -10,6 +13,17 @@ public class User {
     private String password;
     private String telegram;
     private String address;
+
+    @PostConstruct
+    public void init(){
+        System.out.println("Init method is invoked!");
+        this.setTelegram("@ig0r_z1000");
+    }
+
+    @PreDestroy
+    public void destroy(){
+        System.out.println("Pre destroy method is invoked!");
+    }
 
     public User() {
     }

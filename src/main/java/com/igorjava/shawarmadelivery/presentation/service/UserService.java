@@ -18,7 +18,10 @@ public class UserService extends UserInteractor implements ApplicationContextAwa
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.ctx=applicationContext;
-        this.repo=ctx.getBean(UserRepo.class);
+        this.repo=ctx.getBean("u r w LL",UserRepo.class);
+      //  this.repo= (UserRepo) ctx.getBean("userRepoLinkedList");
+      //  this.repo=ctx.getBean("userRepoLinkedList",UserRepo.class);
+      //  this.repo=ctx.getBean(UserRepo.class);
         super.setRepo(repo);
     }
 }

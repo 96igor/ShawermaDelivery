@@ -13,13 +13,13 @@ public class UserRepoImplWithLinkedList implements UserRepo {
     @Override
     public User saveUser(User user) {
         users.add(user);
-        System.out.println("User created!");
+        System.out.println("User created in LinkedList!");
         return user;
     }
 
     @Override
     public void deleteUser(User user) {
-        System.out.println("User deleted!");
+        System.out.println("User deleted from LinkedList!");
         users.remove(user);
     }
 
