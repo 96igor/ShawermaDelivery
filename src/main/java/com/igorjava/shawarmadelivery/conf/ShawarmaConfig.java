@@ -15,14 +15,14 @@ import org.springframework.context.annotation.Scope;
 @Configuration
 public class ShawarmaConfig {
 
-    @Bean
-    //@Scope("prototype")
-    public User user(){
-        User user = new User();
-        user.setName("96igor");
-        user.setTelegram("@ig0r_z1000");
-        return user;
-    }
+//    @Bean
+//    //@Scope("prototype")
+//    public User user(){
+//        User user = new User();
+//        user.setName("96igor");
+//        user.setTelegram("@ig0r_z1000");
+//        return user;
+//    }
 
     @Bean(value="URwAL")
     public UserRepo userRepo(){
