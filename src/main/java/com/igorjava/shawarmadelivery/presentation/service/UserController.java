@@ -1,7 +1,9 @@
 package com.igorjava.shawarmadelivery.presentation.service;
 
 import com.igorjava.shawarmadelivery.domain.model.User;
+import org.springframework.stereotype.Controller;
 
+@Controller
 public class UserController {
 
     private final UserService service;

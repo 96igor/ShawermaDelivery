@@ -2,10 +2,11 @@ package com.igorjava.shawarmadelivery.data.repoImpls.collectionFrw;
 
 import com.igorjava.shawarmadelivery.domain.model.User;
 import com.igorjava.shawarmadelivery.domain.repo.UserRepo;
-
+import org.springframework.stereotype.Component;
 import java.util.LinkedList;
 import java.util.List;
 
+@Component("u r w LL")
 public class UserRepoImplWithLinkedList implements UserRepo {
 
     private final List<User> users=new LinkedList<>();

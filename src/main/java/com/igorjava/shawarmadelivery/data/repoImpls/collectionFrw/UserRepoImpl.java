@@ -2,10 +2,12 @@ package com.igorjava.shawarmadelivery.data.repoImpls.collectionFrw;
 
 import com.igorjava.shawarmadelivery.domain.model.User;
 import com.igorjava.shawarmadelivery.domain.repo.UserRepo;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository(value = "URwAL")
 public class UserRepoImpl implements UserRepo {
 
     private final List<User> users = new ArrayList<>();
