@@ -6,22 +6,24 @@ import org.springframework.stereotype.Repository;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Repository("u r w LL")
 public class UserRepoImplWithLinkedList implements UserRepo {
 
     private final List<User> users=new LinkedList<>();
+    private final Logger log = Logger.getLogger("UserRepoImplWithLinkedList");
 
     @Override
     public User saveUser(User user) {
         users.add(user);
-        System.out.println("User created in LinkedList!");
+        log.info("User created in LinkedList!");
         return user;
     }
 
     @Override
     public void deleteUser(User user) {
-        System.out.println("User deleted from LinkedList!");
+        log.info("User deleted from LinkedList!");
         users.remove(user);
     }
 

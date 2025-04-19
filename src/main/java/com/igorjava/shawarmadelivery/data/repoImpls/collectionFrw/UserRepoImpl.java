@@ -6,22 +6,24 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Repository(value = "URwAL")
 public class UserRepoImpl implements UserRepo {
 
     private final List<User> users = new ArrayList<>();
+    private final Logger logo = Logger.getLogger("UserRepoImpl");
 
     @Override
     public User saveUser(User user) {
         users.add(user);
-        System.out.println("User created!");
+        logo.info("User created!");
         return user;
     }
 
     @Override
     public void deleteUser(User user) {
-        System.out.println("User deleted!");
+        logo.info("User deleted!");
         users.remove(user);
     }
 
