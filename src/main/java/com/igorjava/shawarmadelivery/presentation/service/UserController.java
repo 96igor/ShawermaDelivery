@@ -1,27 +1,22 @@
 package com.igorjava.shawarmadelivery.presentation.service;
 
-import com.igorjava.shawarmadelivery.domain.model.User;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-
-//import java.util.logging.Logger;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
+@RequestMapping("/users")
 public class UserController {
 
     private final UserService service;
 
     public UserController(UserService service) {
-        LoggerFactory.getLogger(UserController.class).info("UserController bean is created!");
         this.service = service;
     }
 
-    public User createUser(User user){
-        return service.createUser(user);
-    }
-
-    public void deleteUser(User user){
-        service.deleteUser(user);
+    @RequestMapping(value = "/new_user", method = RequestMethod.GET)
+    public String newUser() {
+        return "new_user";
     }
 
 }
