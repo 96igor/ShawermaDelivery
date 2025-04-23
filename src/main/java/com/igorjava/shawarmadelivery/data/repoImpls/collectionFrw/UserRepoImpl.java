@@ -2,14 +2,21 @@ package com.igorjava.shawarmadelivery.data.repoImpls.collectionFrw;
 
 import com.igorjava.shawarmadelivery.domain.model.User;
 import com.igorjava.shawarmadelivery.domain.repo.UserRepo;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.condition.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Repository("URwAL")
+//@ConditionalOnBean(UserRepo.class)
+//@ConditionalOnMissingBean(UserRepo.class)
+//@ConditionalOnClass(name = "com.igorjava.shawarmadelivery.data.repoImpls.collectionFrw.UserRepoImpl")
+//@ConditionalOnMissingClass("com.igorjava.shawarmadelivery.data.repoImpls.collectionFrw.UserRepoImpl")
+@ConditionalOnProperty(name = "shawarmadelivery.delivery", havingValue = "true")
 public class UserRepoImpl implements UserRepo {
 
     private final List<User> users = new ArrayList<>();
