@@ -17,9 +17,7 @@ public class ApplicationStartupRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        User user = new User();
-        userController.createUser(user);
-        userController.deleteUser(user);
+
 
     }
 }

@@ -1,11 +1,10 @@
 package com.igorjava.shawarmadelivery.presentation.service;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/users")
+@RequestMapping("/users") //localhost:8081/users
 public class UserController {
 
     private final UserService service;
@@ -14,9 +13,10 @@ public class UserController {
         this.service = service;
     }
 
-    @RequestMapping(value = "/new_user", method = RequestMethod.GET)
-    public String newUser() {
-        return "new_user";
-    }
+//    @GetMapping("/register") //localhost:8081/users/register
+////    @PostMapping(value = "/new_user")
+//    public String register() {
+//        return "register";
+//    }
 
 }
