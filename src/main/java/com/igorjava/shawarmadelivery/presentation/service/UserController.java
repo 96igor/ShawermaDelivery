@@ -13,10 +13,10 @@ public class UserController {
         this.service = service;
     }
 
-//    @GetMapping("/register") //localhost:8081/users/register
-////    @PostMapping(value = "/new_user")
-//    public String register() {
-//        return "register";
-//    }
+    @GetMapping("/register") //localhost:8081/users/register
+//    @PostMapping(value = "/new_user")
+    public String register() {
+        return "register";
+    }
 
 }
