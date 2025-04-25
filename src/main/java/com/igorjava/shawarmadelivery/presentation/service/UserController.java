@@ -14,10 +14,11 @@ public class UserController {
         this.service = service;
     }
 
-    @GetMapping("/register/{name}") //localhost:8081/users/register/name
+    @GetMapping("/register") //localhost:8081/users/register/name
 //    @PostMapping(value = "/new_user")
     public String register(
-            @PathVariable String name,
+//            @PathVariable String name,
+            @RequestParam String name, //localhost:8081/users/register?name=Ihor
             Model model
     ) {
         model.addAttribute("name", name);
