@@ -24,6 +24,8 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String postRegister() { return "";}
+    public String postRegister(
+            @ModelAttribute User user
+    ) { return "";}
 
 }
