@@ -6,17 +6,21 @@
 </head>
 <body>
     <h1>Login</h1>
-    <form th:action="@{/users/login}" th:method="post">
-        <div>
+    <form th:action="@{/users/login}" th:method="post" th:object="${user}" style="max-width: 400px;">
+        <div style="margin-bottom: 10px;">
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>
         </div>
-        <div>
-            <label for="password">Please enter the password:</label>
+        <div style="margin-bottom: 10px;">
+            <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
         </div>
 
         <button type="submit">Login</button>
     </form>
+
+    <div th:if="${error}" style="color:darkred;">
+        <p th:text="${error}"></p>
+    </div>
 </body>
 </html>
