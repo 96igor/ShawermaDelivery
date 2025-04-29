@@ -1,5 +1,6 @@
 package com.igorjava.shawarmadelivery.presentation.service;
 
+import com.igorjava.shawarmadelivery.domain.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,15 +15,15 @@ public class UserController {
         this.service = service;
     }
 
-    @GetMapping("/register") //localhost:8081/users/register/name
-//    @PostMapping(value = "/new_user")
+    @GetMapping("/register")
     public String register(
-//            @PathVariable String name,
-            @RequestParam String name, //localhost:8081/users/register?name=Ihor
             Model model
     ) {
-        model.addAttribute("name", name);
+        model.addAttribute("user", new User());
         return "register";
     }
+
+    @PostMapping("/register")
+    public String postRegister() { return "";}
 
 }
