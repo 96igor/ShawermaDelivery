@@ -24,8 +24,21 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String postRegister(
-            @ModelAttribute User user
-    ) { return "";}
+    public String registerUser(
+            @ModelAttribute User user,
+            Model model
+    ) {
+        service.createUser(user);
+        model.addAttribute("msg", "User registered successfully!");
+        return "redirect:/users/login";
+    }
 
+    @GetMapping
+    public String showLoginForm(
+            Model model
+    ){
+        model.addAttribute("email", "");
+        model.addAttribute("password", "");
+        return "Login";
+    }
 }
