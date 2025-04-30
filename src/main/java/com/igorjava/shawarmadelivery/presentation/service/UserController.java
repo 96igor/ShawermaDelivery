@@ -1,18 +1,26 @@
 package com.igorjava.shawarmadelivery.presentation.service;
 
+import com.igorjava.shawarmadelivery.conf.AuthUtils;
 import com.igorjava.shawarmadelivery.domain.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Controller
 @RequestMapping("/users") //localhost:8081/users
 public class UserController {
 
-    private final UserService service;
+    private static final Logger log = LoggerFactory.getLogger(UserController.class);
 
-    public UserController(UserService service) {
+    private final UserService service;
+    private final AuthUtils authUtils;
+
+    public UserController(UserService service, AuthUtils authUtils) {
+
         this.service = service;
+        this.authUtils = authUtils;
     }
 
     @GetMapping("/register")
@@ -28,7 +36,10 @@ public class UserController {
             @ModelAttribute User user,
             Model model
     ) {
+        String encodedPassword= authUtils.encodePassword(user.getPassword());
+        user.setPassword(encodedPassword);
         service.createUser(user);
+        log.info("User registered: {}", user);
         model.addAttribute("msg", "User registered successfully!");
         return "redirect:/users/login";
     }
@@ -50,7 +61,7 @@ public class UserController {
     ){
         try {
             User user = service.getUserByEmail(email);
-            if (user.getPassword().equals(password)) {
+            if (authUtils.authenticats(password, user.getPassword())){
                 return "redirect:/menu";
             }
             model.addAttribute("error", "Invalid email or password");
