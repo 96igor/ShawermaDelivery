@@ -4,14 +4,10 @@ import com.igorjava.shawarmadelivery.domain.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @Controller
 @RequestMapping("/users") //localhost:8081/users
 public class UserController {
-
-    private static final Logger log = LoggerFactory.getLogger(UserController.class);
 
     private final UserService service;
 
@@ -32,7 +28,6 @@ public class UserController {
             @ModelAttribute User user,
             Model model
     ) {
-        log.info(String.valueOf(user));
         service.createUser(user);
         model.addAttribute("msg", "User registered successfully!");
         return "redirect:/users/login";
@@ -54,7 +49,6 @@ public class UserController {
             Model model
     ){
         try {
-            log.info(email);
             User user = service.getUserByEmail(email);
             if (user.getPassword().equals(password)) {
                 return "redirect:/menu";
@@ -65,5 +59,14 @@ public class UserController {
             model.addAttribute("error", "login failed" + e.getMessage());
             return "login";
         }
+    }
+
+    @PostMapping("/delete")
+    public String deleteUser(
+            @RequestParam String email
+    ){
+            User user = service.getUserByEmail(email);
+            service.deleteUser(user);
+                return "redirect:/users/register";
     }
 }
