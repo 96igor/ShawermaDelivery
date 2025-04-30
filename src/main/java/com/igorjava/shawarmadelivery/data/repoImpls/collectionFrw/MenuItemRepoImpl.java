@@ -3,10 +3,12 @@ package com.igorjava.shawarmadelivery.data.repoImpls.collectionFrw;
 import com.igorjava.shawarmadelivery.domain.model.MenuItem;
 import com.igorjava.shawarmadelivery.domain.model.MenuSection;
 import com.igorjava.shawarmadelivery.domain.repo.MenuItemRepo;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class MenuItemRepoImpl implements MenuItemRepo {
 
     private final List<MenuItem> items=new ArrayList<>();

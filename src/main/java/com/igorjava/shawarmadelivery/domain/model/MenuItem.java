@@ -2,14 +2,16 @@ package com.igorjava.shawarmadelivery.domain.model;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 //@Data
 public class MenuItem {
     private Long id;
     private String name;
     private MenuSection menuSection;
-    private Integer price;
+    private BigDecimal price;
 
-    public MenuItem(Long id, String name, MenuSection menuSection, Integer price) {
+    public MenuItem(Long id, String name, MenuSection menuSection, BigDecimal price) {
         this.id = id;
         this.name = name;
         this.menuSection = menuSection;
@@ -40,11 +42,11 @@ public class MenuItem {
         this.menuSection = menuSection;
     }
 
-    public Integer getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 }
