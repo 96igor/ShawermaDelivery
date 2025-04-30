@@ -1,7 +1,6 @@
 package com.igorjava.shawarmadelivery.conf;
 
-import com.igorjava.shawarmadelivery.domain.model.User;
-import com.igorjava.shawarmadelivery.presentation.service.UserController;
+import com.igorjava.shawarmadelivery.presentation.controller.UserController;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 

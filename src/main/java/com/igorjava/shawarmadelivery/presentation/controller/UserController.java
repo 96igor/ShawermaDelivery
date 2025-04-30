@@ -1,7 +1,8 @@
-package com.igorjava.shawarmadelivery.presentation.service;
+package com.igorjava.shawarmadelivery.presentation.controller;
 
 import com.igorjava.shawarmadelivery.conf.AuthUtils;
 import com.igorjava.shawarmadelivery.domain.model.User;
+import com.igorjava.shawarmadelivery.presentation.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
