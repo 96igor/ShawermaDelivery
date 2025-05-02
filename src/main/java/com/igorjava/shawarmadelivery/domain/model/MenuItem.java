@@ -4,7 +4,7 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-//@Data
+//@Data @AllArgsConstructor
 public class MenuItem {
     private Long id;
     private String name;
