@@ -4,10 +4,12 @@ import com.igorjava.shawarmadelivery.domain.model.Order;
 import com.igorjava.shawarmadelivery.domain.model.OrderStatus;
 import com.igorjava.shawarmadelivery.domain.model.User;
 import com.igorjava.shawarmadelivery.domain.repo.OrderRepo;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class OrderRepoImpl implements OrderRepo {
 
     private final List<Order> orders=new ArrayList<>();

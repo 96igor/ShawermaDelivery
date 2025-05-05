@@ -2,10 +2,12 @@ package com.igorjava.shawarmadelivery.data.repoImpls.collectionFrw;
 
 import com.igorjava.shawarmadelivery.domain.model.Delivery;
 import com.igorjava.shawarmadelivery.domain.repo.DeliveryRepo;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class DeliveryRepoImpl implements DeliveryRepo {
 
     private final List<Delivery> deliveries = new ArrayList();
