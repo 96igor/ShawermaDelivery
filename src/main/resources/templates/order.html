@@ -29,7 +29,7 @@
     <form th:action="@{/order/submit}" th:method="post" th:object="${delivery}">
         <div>
             <label for="username">Username:</label>
-            <input type="text" id="username" name="username" th:field="*{order.user.name}"/>
+            <input type="text" id="username" name="username" th:field="${user.name}"/>
         </div>
         <div>
             <label for="address">Address:</label>

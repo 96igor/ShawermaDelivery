@@ -57,4 +57,15 @@ public class Delivery {
     public void setOrder(Order order) {
         this.order = order;
     }
+
+    @Override
+    public String toString() {
+        return "Delivery{" +
+                "id=" + id +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
+                ", dateTime=" + dateTime +
+                ", order=" + (order != null ? order.toString() : "null") +
+                '}';
+    }
 }
