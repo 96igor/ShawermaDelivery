@@ -1,20 +1,23 @@
 package com.igorjava.shawarmadelivery.domain.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
 //@Data
+@NoArgsConstructor
 public class Order {
     private Long id;
     private LocalDateTime dateTime;
     private OrderStatus status;
     private User user;
     private List<MenuItem> itemList;
-    private Integer totalPrice;
+    private BigDecimal totalPrice;
 
-    public Order(Long id, LocalDateTime dateTime, OrderStatus status, User user, List<MenuItem> itemList, Integer totalPrice) {
+    public Order(Long id, LocalDateTime dateTime, OrderStatus status, User user, List<MenuItem> itemList, BigDecimal totalPrice) {
         this.id = id;
         this.dateTime = dateTime;
         this.status = status;
@@ -63,11 +66,23 @@ public class Order {
         this.itemList = itemList;
     }
 
-    public Integer getTotalPrice() {
+    public BigDecimal getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(Integer totalPrice) {
+    public void setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", dateTime=" + dateTime +
+                ", status=" + status +
+                ", userId=" + (user != null ? user.getId() : null) +
+                ", itemCount=" + (itemList != null ? itemList.size() : 0) +
+                ", totalPrice=" + totalPrice +
+                '}';
     }
 }

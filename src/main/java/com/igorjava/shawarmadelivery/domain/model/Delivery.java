@@ -8,19 +8,23 @@ import java.time.LocalDateTime;
 public class Delivery {
     private Long id;
     private String address;
+    private String phone;
     private LocalDateTime dateTime;
     private Order order;
 
-    public Delivery(Long id, String address, LocalDateTime dateTime, Order order) {
+    public Delivery(Long id, String address, String phone, LocalDateTime dateTime, Order order) {
         this.id = id;
         this.address = address;
+        this.phone = phone;
         this.dateTime = dateTime;
         this.order = order;
     }
 
-    public Long getId() {
-        return id;
+    public Delivery() {
+
     }
+
+    public Long getId() { return id; }
 
     public void setId(Long id) {
         this.id = id;
@@ -33,6 +37,10 @@ public class Delivery {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    public String getPhone() { return phone; }
+
+    public void setPhone(String phone) { this.phone = phone; }
 
     public LocalDateTime getDateTime() {
         return dateTime;

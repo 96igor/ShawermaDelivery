@@ -15,7 +15,7 @@
                     <input type="checkbox" th:id="|item_${item.id}|" th:name="selectedId" th:value="${item.id}" onchange="toggleQuantity(this)">
                     <label th:for="|item_${item.id}|" th:text="${item.name}"></label>
                     <span class="price" th:text="${item.price} + ' руб.'"></span>
-                    <input type="number" th:id="|quantity_${item.id}|" th:name="quentites"
+                    <input type="number" th:id="|quantity_${item.id}|" th:name="quantities"
                            min="1" value="1" disabled>
                 </div>
             </div>

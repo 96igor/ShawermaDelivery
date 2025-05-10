@@ -26,7 +26,7 @@ public class MenuItemInteractor {
         return repo.getMenuItemBySection(section);
     }
 
-    public MenuItem getMunuItemById(Long id){
+    public MenuItem getMenuItemById(Long id){
         return repo.getMenuItemById(id);
     }
 
