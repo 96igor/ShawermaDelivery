@@ -1,12 +1,19 @@
-package com.igorjava.shawarmadelivery.domain.model;
+package com.igorjava.shawarmadelivery.presentation.service;
 
+import com.igorjava.shawarmadelivery.domain.model.MenuItem;
+import org.springframework.stereotype.Service;
+import org.springframework.web.context.annotation.SessionScope;
 import java.util.List;
 
-public class SessionInfo {
+@Service
+@SessionScope
+public class SessionInfoService {
     private String username;
     private String phone;
     private String address;
     private List<MenuItem> cart;
+
+    public SessionInfoService() {}
 
     public String getUsername() {
         return username;
@@ -39,11 +46,5 @@ public class SessionInfo {
     public void setCart(List<MenuItem> cart) {
         this.cart = cart;
     }
-
-    public SessionInfo(String username, String phone, String address, List<MenuItem> cart) {
-        this.username = username;
-        this.phone = phone;
-        this.address = address;
-        this.cart = cart;
-    }
 }
+
