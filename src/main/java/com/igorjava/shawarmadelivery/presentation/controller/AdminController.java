@@ -1,6 +1,9 @@
 package com.igorjava.shawarmadelivery.presentation.controller;
 
+import com.igorjava.shawarmadelivery.domain.model.OrderStatus;
+import com.igorjava.shawarmadelivery.presentation.service.OrderService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -8,10 +11,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin")
 public class AdminController {
 
-    @GetMapping
-    public String showAdminPanel(){
+    private final OrderService orderService;
 
-        return "admin";
+    public AdminController(OrderService orderService) {
+        this.orderService = orderService;
     }
 
+    @GetMapping
+    public String showAdminPanel(Model model){
+        model.addAttribute("newOrders", orderService.getOrdersByStatus(OrderStatus.NEW));
+        return "admin";
+    }
 }
