@@ -1,17 +1,34 @@
 package com.igorjava.shawarmadelivery.presentation.service;
 
 import com.igorjava.shawarmadelivery.domain.model.MenuItem;
+import com.igorjava.shawarmadelivery.domain.model.User;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.annotation.SessionScope;
+import org.springframework.web.context.WebApplicationContext;
+
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
-@SessionScope
+@Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class SessionInfoService {
     private String username;
     private String phone;
     private String address;
+    private String email;
     private List<MenuItem> cart;
+
+    public void setUserInfo(User user) {
+        setUsername(user.getName());
+        setPhone(user.getPhone());
+        setAddress(user.getAddress());
+        setEmail(user.getEmail());
+    }
+
+    public BigDecimal getTotalPrice(){
+        return cart.stream().map(MenuItem::getPrice).reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
 
     public SessionInfoService() {}
 
@@ -37,6 +54,14 @@ public class SessionInfoService {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public List<MenuItem> getCart() {

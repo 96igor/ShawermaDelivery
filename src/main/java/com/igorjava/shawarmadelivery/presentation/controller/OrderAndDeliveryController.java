@@ -1,17 +1,14 @@
 package com.igorjava.shawarmadelivery.presentation.controller;
 
 import com.igorjava.shawarmadelivery.domain.model.*;
-import com.igorjava.shawarmadelivery.presentation.service.DeliveryService;
-import com.igorjava.shawarmadelivery.presentation.service.MenuItemService;
-import com.igorjava.shawarmadelivery.presentation.service.OrderService;
-import com.igorjava.shawarmadelivery.presentation.service.UserService;
+import com.igorjava.shawarmadelivery.presentation.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -26,12 +23,14 @@ public class OrderAndDeliveryController {
     private final OrderService orderService;
     private final DeliveryService deliveryService;
     private final UserService userService;
+    private final SessionInfoService sessionInfoService;
 
-    public OrderAndDeliveryController(MenuItemService menuItemService, OrderService orderService, DeliveryService deliveryService, UserService userService) {
+    public OrderAndDeliveryController(MenuItemService menuItemService, OrderService orderService, DeliveryService deliveryService, UserService userService, SessionInfoService sessionInfoService) {
         this.menuItemService = menuItemService;
         this.orderService = orderService;
         this.deliveryService = deliveryService;
         this.userService = userService;
+        this.sessionInfoService = sessionInfoService;
     }
 
     @PostMapping("/order")
@@ -46,13 +45,27 @@ public class OrderAndDeliveryController {
                 selectedMenuItems.add(menuItemService.getMenuItemById(selectedId.get(i)));
             }
         }
-
+        sessionInfoService.setCart(selectedMenuItems);
+        model.addAttribute("sessionInfoService", sessionInfoService);
         log.info("selectedItems: {}", selectedId);
         log.info("quantities: {}", quantities);
+           return "order";
+    }
+    @PostMapping("/order/submit")
+    public String orderSubmit() {
+        log.info("sessionInfoService: {}", sessionInfoService);
+
+        User user = userService.getUserByEmail(sessionInfoService.getEmail());
+        user.setAddress(sessionInfoService.getAddress());
+        user.setName(sessionInfoService.getUsername());
+        user.setPhone(sessionInfoService.getPhone());
+
+        List<MenuItem> selectedMenuItems = sessionInfoService.getCart();
 
         BigDecimal totalPrice = selectedMenuItems.stream()
                 .map(MenuItem::getPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
+
         Order order = new Order(
                 null,
                 LocalDateTime.now(),
@@ -61,31 +74,17 @@ public class OrderAndDeliveryController {
                 selectedMenuItems,
                 totalPrice
         );
+
         order.setStatus(OrderStatus.NEW);
-        order.setItemList(selectedMenuItems);
-        order.setTotalPrice(totalPrice);
+        order.setItemList(sessionInfoService.getCart());
+        order.setTotalPrice(sessionInfoService.getTotalPrice());
         order.setDateTime(LocalDateTime.now());
+        order.setUser(user);
 
         Delivery delivery = new Delivery();
-
-        User user = new User();
-
-        delivery.setOrder(order);
-        model.addAttribute("delivery", delivery);
-        model.addAttribute("order", order);
-        model.addAttribute("user", user);
-        return "order";
-    }
-    @PostMapping("/order/submit")
-    public String orderSubmit(
-            @ModelAttribute Delivery delivery,
-            @ModelAttribute Order order,
-            @ModelAttribute User user
-    ){
-        log.info("delivery: {}", delivery);
-        log.info("order: {}", order);
-        log.info("user: {}", user);
-        order.setUser(user);
+        delivery.setDateTime(LocalDateTime.now());
+        delivery.setPhone(sessionInfoService.getPhone());
+        delivery.setAddress(sessionInfoService.getAddress());
         delivery.setOrder(order);
 
         orderService.changeOrder(delivery.getOrder());
