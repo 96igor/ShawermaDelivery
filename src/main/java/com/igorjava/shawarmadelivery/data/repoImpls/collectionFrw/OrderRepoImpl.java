@@ -5,9 +5,9 @@ import com.igorjava.shawarmadelivery.domain.model.OrderStatus;
 import com.igorjava.shawarmadelivery.domain.model.User;
 import com.igorjava.shawarmadelivery.domain.repo.OrderRepo;
 import org.springframework.stereotype.Repository;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class OrderRepoImpl implements OrderRepo {
@@ -31,7 +31,8 @@ public class OrderRepoImpl implements OrderRepo {
     public List<Order> getOrdersByUser(User user) {
         return orders.stream()
                 .filter(order -> order.getUser().getId().equals(user.getId()))
-                .toList();
+                .collect(Collectors.toList());
+//                .toList();
     }
 
     @Override

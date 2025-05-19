@@ -4,7 +4,6 @@ import com.igorjava.shawarmadelivery.domain.model.Order;
 import com.igorjava.shawarmadelivery.domain.model.OrderStatus;
 import com.igorjava.shawarmadelivery.domain.model.User;
 import com.igorjava.shawarmadelivery.domain.repo.OrderRepo;
-
 import java.util.List;
 
 public class OrderInteractor {

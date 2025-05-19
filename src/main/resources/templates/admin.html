@@ -21,7 +21,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr th:each="order : ${newOrder}">
+            <tr th:each="order : ${newOrders}">
                 <td th:text="${order.dateTime}"></td>
                 <td th:text="${order.user.name}"></td>
                 <td th:text="${order.user.address}"></td>

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -47,9 +46,7 @@ public class OrderAndDeliveryController {
         }
         sessionInfoService.setCart(selectedMenuItems);
         model.addAttribute("sessionInfoService", sessionInfoService);
-        log.info("selectedItems: {}", selectedId);
-        log.info("quantities: {}", quantities);
-           return "order";
+        return "order";
     }
     @PostMapping("/order/submit")
     public String orderSubmit() {
@@ -61,10 +58,8 @@ public class OrderAndDeliveryController {
         user.setPhone(sessionInfoService.getPhone());
 
         List<MenuItem> selectedMenuItems = sessionInfoService.getCart();
+        BigDecimal totalPrice = sessionInfoService.getTotalPrice();
 
-        BigDecimal totalPrice = selectedMenuItems.stream()
-                .map(MenuItem::getPrice)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         Order order = new Order(
                 null,
@@ -87,7 +82,7 @@ public class OrderAndDeliveryController {
         delivery.setAddress(sessionInfoService.getAddress());
         delivery.setOrder(order);
 
-        orderService.changeOrder(delivery.getOrder());
+        orderService.createOrder(delivery.getOrder());
         deliveryService.createDelivery(delivery);
         userService.createUser(user);
         return "redirect:/menu";
