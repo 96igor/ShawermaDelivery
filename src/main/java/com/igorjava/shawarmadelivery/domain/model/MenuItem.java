@@ -46,4 +46,13 @@ public class MenuItem {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return "MenuItem{id=" + id +
+                ", name='" + name + '\'' +
+                ", menuSection=" + menuSection +
+                ", price=" + price +
+                '}';
+    }
 }

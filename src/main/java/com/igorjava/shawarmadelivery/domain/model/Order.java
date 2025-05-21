@@ -78,8 +78,8 @@ public class Order {
                 "id=" + id +
                 ", dateTime=" + dateTime +
                 ", status=" + status +
-                ", userId=" + (user != null ? user.getId() : null) +
-                ", itemCount=" + (itemList != null ? itemList.size() : 0) +
+                ", user=" + (user != null ? user.toString() : "null") +
+                ", itemList=" + (itemList != null ? itemList.toString() : "[]") +
                 ", totalPrice=" + totalPrice +
                 '}';
     }

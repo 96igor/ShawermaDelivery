@@ -22,6 +22,8 @@ public class OrderInteractor {
         return repo.updateOrder(order);
     }
 
+    public Order updateOrderStatus(Long orderId, OrderStatus status){ return repo.updateOrderStatus(orderId, status); }
+
     public List<Order> getOrdersByUser(User user){
         return repo.getOrdersByUser(user);
     }

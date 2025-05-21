@@ -38,7 +38,7 @@
                     <form th:action="@{/admin/orders/update/{id}(id=${order.id})}" th:method="post">
                         <select name="status">
                             <option th:each="status : ${T(com.igorjava.shawarmadelivery.domain.model.OrderStatus).values()}"
-                                  th:text="${status}"
+                                th:text="${status}"
                                     th:value="${status}"
                             ></option>
                         </select>
