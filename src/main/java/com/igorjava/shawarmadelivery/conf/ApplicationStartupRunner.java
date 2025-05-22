@@ -20,52 +20,56 @@ public class ApplicationStartupRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         menuItemRepo.saveMenuItem(
-                new MenuItem(1L, "Гиро в лаваше L", MenuSection.MAIN_MENU, BigDecimal.valueOf(240)));
+                new MenuItem(1L, "Шаурма L", MenuSection.MAIN_MENU, BigDecimal.valueOf(240)));
         menuItemRepo.saveMenuItem(
-                new MenuItem(2L, "Гиро в лаваше XL", MenuSection.MAIN_MENU, BigDecimal.valueOf(290)));
+                new MenuItem(2L, "Шаурма XL", MenuSection.MAIN_MENU, BigDecimal.valueOf(290)));
         menuItemRepo.saveMenuItem(
-                new MenuItem(3L, "Гиро в лепёшке", MenuSection.MAIN_MENU, BigDecimal.valueOf(240)));
+                new MenuItem(3L, "Гиро в лаваше L", MenuSection.MAIN_MENU, BigDecimal.valueOf(240)));
         menuItemRepo.saveMenuItem(
-                new MenuItem(4L, "Гиро в пите", MenuSection.MAIN_MENU, BigDecimal.valueOf(240)));
+                new MenuItem(4L, "Гиро в лаваше XL", MenuSection.MAIN_MENU, BigDecimal.valueOf(290)));
         menuItemRepo.saveMenuItem(
-                new MenuItem(5L, "Люля кебаб на углях в лаваше", MenuSection.MAIN_MENU, BigDecimal.valueOf(330)));
+                new MenuItem(5L, "Гиро в лепёшке", MenuSection.MAIN_MENU, BigDecimal.valueOf(240)));
         menuItemRepo.saveMenuItem(
-                new MenuItem(6L, "Люля на углях в лепёшке", MenuSection.MAIN_MENU, BigDecimal.valueOf(330)));
+                new MenuItem(6L, "Гиро в пите", MenuSection.MAIN_MENU, BigDecimal.valueOf(240)));
         menuItemRepo.saveMenuItem(
-                new MenuItem(7L, "Чизбургер куринный", MenuSection.MAIN_MENU, BigDecimal.valueOf(230)));
+                new MenuItem(7L, "Люля кебаб на углях в лаваше", MenuSection.MAIN_MENU, BigDecimal.valueOf(330)));
         menuItemRepo.saveMenuItem(
-                new MenuItem(8L, "Хот-Дог", MenuSection.MAIN_MENU, BigDecimal.valueOf(150)));
+                new MenuItem(8L, "Люля на углях в лепёшке", MenuSection.MAIN_MENU, BigDecimal.valueOf(330)));
         menuItemRepo.saveMenuItem(
-                new MenuItem(9L, "Блэкбургер", MenuSection.MAIN_MENU, BigDecimal.valueOf(230)));
+                new MenuItem(9L, "Чизбургер куринный", MenuSection.MAIN_MENU, BigDecimal.valueOf(230)));
+        menuItemRepo.saveMenuItem(
+                new MenuItem(10L, "Хот-Дог", MenuSection.MAIN_MENU, BigDecimal.valueOf(150)));
+        menuItemRepo.saveMenuItem(
+                new MenuItem(11L, "Блэкбургер", MenuSection.MAIN_MENU, BigDecimal.valueOf(230)));
 
         menuItemRepo.saveMenuItem(
-                new MenuItem(10L, "Фри L", MenuSection.SNACKS, BigDecimal.valueOf(130)));
+                new MenuItem(12L, "Фри L", MenuSection.SNACKS, BigDecimal.valueOf(130)));
         menuItemRepo.saveMenuItem(
-                new MenuItem(11L, "Фри XL", MenuSection.SNACKS, BigDecimal.valueOf(150)));
+                new MenuItem(13L, "Фри XL", MenuSection.SNACKS, BigDecimal.valueOf(150)));
         menuItemRepo.saveMenuItem(
-                new MenuItem(12L, "По-деревенски", MenuSection.SNACKS, BigDecimal.valueOf(150)));
+                new MenuItem(14L, "По-деревенски", MenuSection.SNACKS, BigDecimal.valueOf(150)));
         menuItemRepo.saveMenuItem(
-                new MenuItem(13L, "Наггетсы", MenuSection.SNACKS, BigDecimal.valueOf(150)));
+                new MenuItem(15L, "Наггетсы", MenuSection.SNACKS, BigDecimal.valueOf(150)));
         menuItemRepo.saveMenuItem(
-                new MenuItem(14L, "Французкий Хот-Дог", MenuSection.SNACKS, BigDecimal.valueOf(150)));
+                new MenuItem(16L, "Французкий Хот-Дог", MenuSection.SNACKS, BigDecimal.valueOf(150)));
 
         menuItemRepo.saveMenuItem(
-                new MenuItem(15L, "Халапеньо", MenuSection.SUPPLEMENTS, BigDecimal.valueOf(40)));
+                new MenuItem(17L, "Халапеньо", MenuSection.SUPPLEMENTS, BigDecimal.valueOf(40)));
         menuItemRepo.saveMenuItem(
-                new MenuItem(16L, "Сыр", MenuSection.SUPPLEMENTS, BigDecimal.valueOf(40)));
+                new MenuItem(18L, "Сыр", MenuSection.SUPPLEMENTS, BigDecimal.valueOf(40)));
 
         menuItemRepo.saveMenuItem(
-                new MenuItem(17L, "Фирменный от Шефа", MenuSection.SAUCES, BigDecimal.valueOf(40)));
+                new MenuItem(19L, "Фирменный от Шефа", MenuSection.SAUCES, BigDecimal.valueOf(40)));
         menuItemRepo.saveMenuItem(
-                new MenuItem(18L, "Томатный", MenuSection.SAUCES, BigDecimal.valueOf(40)));
+                new MenuItem(20L, "Томатный", MenuSection.SAUCES, BigDecimal.valueOf(40)));
         menuItemRepo.saveMenuItem(
-                new MenuItem(19L, "Барбекю", MenuSection.SAUCES, BigDecimal.valueOf(40)));
+                new MenuItem(21L, "Барбекю", MenuSection.SAUCES, BigDecimal.valueOf(40)));
         menuItemRepo.saveMenuItem(
-                new MenuItem(20L, "Сырный", MenuSection.SAUCES, BigDecimal.valueOf(40)));
+                new MenuItem(22L, "Сырный", MenuSection.SAUCES, BigDecimal.valueOf(40)));
         menuItemRepo.saveMenuItem(
-                new MenuItem(21L, "Чесночный", MenuSection.SAUCES, BigDecimal.valueOf(40)));
+                new MenuItem(23L, "Чесночный", MenuSection.SAUCES, BigDecimal.valueOf(40)));
         menuItemRepo.saveMenuItem(
-                new MenuItem(22L, "Кисло-Сладкий", MenuSection.SAUCES, BigDecimal.valueOf(40)));
+                new MenuItem(24L, "Кисло-Сладкий", MenuSection.SAUCES, BigDecimal.valueOf(40)));
 
     }
 }
