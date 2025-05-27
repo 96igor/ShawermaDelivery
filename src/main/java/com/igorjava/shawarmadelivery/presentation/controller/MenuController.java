@@ -23,11 +23,11 @@ public class MenuController {
 
     @GetMapping
     public String showMenu(Model model){
-        Map<MenuSection, List<MenuItem>> menuItemsBySection = Map.of(
-                MenuSection.MAIN_MENU, service.getMenuItemsBySection(MenuSection.MAIN_MENU),
-                MenuSection.SNACKS, service.getMenuItemsBySection(MenuSection.SNACKS),
-                MenuSection.SUPPLEMENTS, service.getMenuItemsBySection(MenuSection.SUPPLEMENTS),
-                MenuSection.SAUCES, service.getMenuItemsBySection(MenuSection.SAUCES));
+        Map<String, List<MenuItem>> menuItemsBySection = Map.of(
+                "menu.main_menu", service.getMenuItemsBySection(MenuSection.MAIN_MENU),
+                "menu.snacks", service.getMenuItemsBySection(MenuSection.SNACKS),
+                "menu.supplements", service.getMenuItemsBySection(MenuSection.SUPPLEMENTS),
+                "menu.sauces", service.getMenuItemsBySection(MenuSection.SAUCES));
         model.addAttribute("menuItemsBySection", menuItemsBySection);
         return "menu";
     }
