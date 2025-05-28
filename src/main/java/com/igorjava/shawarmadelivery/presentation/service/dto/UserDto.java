@@ -1,19 +1,30 @@
-package com.igorjava.shawarmadelivery.domain.model;
+package com.igorjava.shawarmadelivery.presentation.service.dto;
 
+import jakarta.validation.constraints.*;
+import org.springframework.stereotype.Component;
 
-public class User {
+@Component
+public class UserDto {
     private Long id;
+    @NotBlank(message = "Name required")
     private String name;
+    @NotBlank(message = "Email required")
+    @Email(message = "Email should be valid")
     private String email;
+    @NotBlank(message = "Password required")
+    @Size(min = 6, message = "Password should be at last 6 characters")
     private String password;
     private String telegram;
+    @NotBlank(message = "Phone number required")
+    @Pattern(regexp = "^\\+?\\d+$", message = "Only digits for phone number")
     private String phone;
+    @NotBlank(message = "Address required")
     private String address;
 
-    public User() {
+    public UserDto() {
     }
 
-    public User(Long id, String name, String email, String password, String telegram, String phone, String address) {
+    public UserDto(Long id, String name, String email, String password, String telegram, String phone, String address) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -92,3 +103,4 @@ public class User {
                 '}';
     }
 }
+
