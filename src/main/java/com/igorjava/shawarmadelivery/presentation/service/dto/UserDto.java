@@ -19,6 +19,7 @@ public class UserDto {
     @Pattern(regexp = "^\\+?\\d+$", message = "Only digits for phone number")
     private String phone;
     @NotBlank(message = "Address required")
+    @Size(min = 4, message = "Address must be more than 4 characters")
     private String address;
 
     public UserDto() {

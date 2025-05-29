@@ -4,8 +4,11 @@ import com.igorjava.shawarmadelivery.conf.AuthUtils;
 import com.igorjava.shawarmadelivery.domain.model.User;
 import com.igorjava.shawarmadelivery.presentation.service.SessionInfoService;
 import com.igorjava.shawarmadelivery.presentation.service.UserService;
+import com.igorjava.shawarmadelivery.presentation.service.dto.UserDto;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,15 +34,20 @@ public class UserController {
     public String register(
             Model model
     ) {
-        model.addAttribute("user", new User());
+        model.addAttribute("user", new UserDto());
         return "register";
     }
 
     @PostMapping("/register")
     public String registerUser(
-            @ModelAttribute User user,
+            @Valid @ModelAttribute UserDto user,
+            BindingResult result,
             Model model
     ) {
+        if (result.hasErrors()) {
+            return "redirect:/register";
+        }
+
         String encodedPassword= authUtils.encodePassword(user.getPassword());
         user.setPassword(encodedPassword);
         service.createUser(user);
