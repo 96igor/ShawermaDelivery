@@ -1,7 +1,7 @@
 package com.igorjava.shawarmadelivery.presentation.service;
 
+import com.igorjava.shawarmadelivery.domain.model.IUser;
 import com.igorjava.shawarmadelivery.domain.model.MenuItem;
-import com.igorjava.shawarmadelivery.domain.model.User;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ public class SessionInfoService {
     private String email;
     private List<MenuItem> cart;
 
-    public void setUserInfo(User user) {
+    public void setUserInfo(IUser user) {
         setUsername(user.getName());
         setPhone(user.getPhone());
         setAddress(user.getAddress());

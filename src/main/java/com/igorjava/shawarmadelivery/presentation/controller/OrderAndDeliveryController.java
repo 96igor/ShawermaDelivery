@@ -62,7 +62,7 @@ public class OrderAndDeliveryController {
     public String orderSubmit() {
         log.info("sessionInfoService: {}", sessionInfoService);
 
-        User user = userService.getUserByEmail(sessionInfoService.getEmail());
+        IUser user = userService.getUserByEmail(sessionInfoService.getEmail());
         user.setAddress(sessionInfoService.getAddress());
         user.setName(sessionInfoService.getUsername());
         user.setPhone(sessionInfoService.getPhone());

@@ -1,7 +1,7 @@
 package com.igorjava.shawarmadelivery.presentation.controller;
 
 import com.igorjava.shawarmadelivery.conf.AuthUtils;
-import com.igorjava.shawarmadelivery.domain.model.User;
+import com.igorjava.shawarmadelivery.domain.model.IUser;
 import com.igorjava.shawarmadelivery.presentation.service.SessionInfoService;
 import com.igorjava.shawarmadelivery.presentation.service.UserService;
 import com.igorjava.shawarmadelivery.presentation.service.dto.UserDto;
@@ -40,12 +40,17 @@ public class UserController {
 
     @PostMapping("/register")
     public String registerUser(
-            @Valid @ModelAttribute UserDto user,
+            @Valid @ModelAttribute("user") UserDto user,
             BindingResult result,
             Model model
     ) {
         if (result.hasErrors()) {
-            return "redirect:/register";
+//            log.info("ValidationErrors: {}", result.getFieldError());
+//            result.getFieldErrors().forEach(error ->
+//                    log.info("Validation error in field '{}': {}", error.getField(), error.getDefaultMessage())
+//            );
+            model.addAttribute("user", user);
+            return "register";
         }
 
         String encodedPassword= authUtils.encodePassword(user.getPassword());
@@ -73,7 +78,7 @@ public class UserController {
             Model model
     ){
         try {
-            User user = service.getUserByEmail(email);
+            IUser user = service.getUserByEmail(email);
             if (authUtils.authenticats(password, user.getPassword())){
                 sessionInfoService.setUserInfo(user);
                 return "redirect:/menu";
@@ -90,7 +95,7 @@ public class UserController {
     public String deleteUser(
             @RequestParam String email
     ){
-            User user = service.getUserByEmail(email);
+            IUser user = service.getUserByEmail(email);
             service.deleteUser(user);
                 return "redirect:/users/register";
     }

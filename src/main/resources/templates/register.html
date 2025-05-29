@@ -14,17 +14,17 @@
         <div style="margin-bottom: 10px;">
             <label for="name" th:text="#{register.name}">Name:</label>
             <input type="text" id="name" th:field="*{name}" required>
-            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:style="color:red"></span>
+            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:style="'color:red'"></span>
         </div>
         <div style="margin-bottom: 10px;">
             <label for="email" th:text="#{register.email}">Email:</label>
             <input type="email" id="email" th:field="*{email}" required>
-            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" th:style="color:red"></span>
+            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" th:style="'color:red'"></span>
         </div>
         <div style="margin-bottom: 10px;">
             <label for="password" th:text="#{register.password}">Password:</label>
             <input type="password" id="password" th:field="*{password}" required>
-            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" th:style="color:red"></span>
+            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" th:style="'color:red'"></span>
         </div>
         <div style="margin-bottom: 10px;">
             <label for="telegram" th:text="#{register.telegram}">Telegram:</label>
@@ -33,12 +33,12 @@
         <div style="margin-bottom: 10px;">
             <label for="phone" th:text="#{register.phone}">Phone number:</label>
             <input type="text" id="phone" th:field="*{phone}">
-            <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" th:style="color:red"></span>
+            <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" th:style="'color:red'"></span>
         </div>
         <div style="margin-bottom: 10px;">
             <label for="address" th:text="#{register.address}">Address:</label>
             <input type="text" id="address" th:field="*{address}">
-            <span th:if="${#fields.hasErrors('address')}" th:errors="*{address}" th:style="color:red"></span>
+            <span th:if="${#fields.hasErrors('address')}" th:errors="*{address}" th:style="'color:red'"></span>
         </div>
         <button type="submit" th:text="#{register.submit}">Register</button>
     </form>

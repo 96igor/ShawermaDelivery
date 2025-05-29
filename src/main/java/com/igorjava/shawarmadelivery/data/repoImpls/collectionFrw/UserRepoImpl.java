@@ -1,5 +1,6 @@
 package com.igorjava.shawarmadelivery.data.repoImpls.collectionFrw;
 
+import com.igorjava.shawarmadelivery.domain.model.IUser;
 import com.igorjava.shawarmadelivery.domain.model.User;
 import com.igorjava.shawarmadelivery.domain.repo.UserRepo;
 import org.slf4j.Logger;
@@ -11,25 +12,25 @@ import java.util.List;
 @Repository("URwAL")
 public class UserRepoImpl implements UserRepo {
 
-    private final List<User> users = new ArrayList<>();
+    private final List<IUser> users = new ArrayList<>();
 //    private final Logger logo = Logger.getLogger("UserRepoImpl");
     private final Logger logo = LoggerFactory.getLogger(UserRepoImpl.class);
 
     @Override
-    public User saveUser(User user) {
+    public IUser saveUser(IUser user) {
         users.add(user);
         logo.info("User created!");
         return user;
     }
 
     @Override
-    public void deleteUser(User user) {
+    public void deleteUser(IUser user) {
         logo.info("User deleted!");
         users.remove(user);
     }
 
     @Override
-    public User getUserByEmail(String email) {
+    public IUser getUserByEmail(String email) {
         return users.stream()
                 .filter(user -> user.getEmail().equals(email))
                 .findFirst()
@@ -37,7 +38,7 @@ public class UserRepoImpl implements UserRepo {
     }
 
     @Override
-    public User updateUser(User user) {
+    public IUser updateUser(IUser user) {
         int index=users.indexOf(user);
         if (index != -1) users.set(index,user);
         return user;

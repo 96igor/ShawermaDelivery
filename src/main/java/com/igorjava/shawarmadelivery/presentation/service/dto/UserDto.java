@@ -1,10 +1,11 @@
 package com.igorjava.shawarmadelivery.presentation.service.dto;
 
+import com.igorjava.shawarmadelivery.domain.model.IUser;
 import jakarta.validation.constraints.*;
 import org.springframework.stereotype.Component;
 
-@Component
-public class UserDto {
+//@Component
+public class UserDto implements IUser {
     private Long id;
     @NotBlank(message = "Name required")
     private String name;

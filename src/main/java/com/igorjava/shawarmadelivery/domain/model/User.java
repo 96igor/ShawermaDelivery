@@ -1,7 +1,7 @@
 package com.igorjava.shawarmadelivery.domain.model;
 
 
-public class User {
+public class User implements IUser{
     private Long id;
     private String name;
     private String email;

@@ -11,11 +11,11 @@ public class Order {
     private Long id;
     private LocalDateTime dateTime;
     private OrderStatus status;
-    private User user;
+    private IUser user;
     private List<MenuItem> itemList;
     private BigDecimal totalPrice;
 
-    public Order(Long id, LocalDateTime dateTime, OrderStatus status, User user, List<MenuItem> itemList, BigDecimal totalPrice) {
+    public Order(Long id, LocalDateTime dateTime, OrderStatus status, IUser user, List<MenuItem> itemList, BigDecimal totalPrice) {
         this.id = id;
         this.dateTime = dateTime;
         this.status = status;
@@ -48,11 +48,11 @@ public class Order {
         this.status = status;
     }
 
-    public User getUser() {
+    public IUser getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(IUser user) {
         this.user = user;
     }
 
