@@ -2,7 +2,7 @@ package com.igorjava.shawarmadelivery.domain.model;
 
 import java.math.BigDecimal;
 
-public class MenuItem {
+public class MenuItem implements IMenuItem{
     private Long id;
     private String name;
     private MenuSection menuSection;

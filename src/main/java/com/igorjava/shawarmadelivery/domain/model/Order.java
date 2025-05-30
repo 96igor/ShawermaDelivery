@@ -7,15 +7,15 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @NoArgsConstructor
-public class Order {
+public class Order implements IOrder{
     private Long id;
     private LocalDateTime dateTime;
     private OrderStatus status;
     private IUser user;
-    private List<MenuItem> itemList;
+    private List<IMenuItem> itemList;
     private BigDecimal totalPrice;
 
-    public Order(Long id, LocalDateTime dateTime, OrderStatus status, IUser user, List<MenuItem> itemList, BigDecimal totalPrice) {
+    public Order(Long id, LocalDateTime dateTime, OrderStatus status, IUser user, List<IMenuItem> itemList, BigDecimal totalPrice) {
         this.id = id;
         this.dateTime = dateTime;
         this.status = status;
@@ -56,11 +56,11 @@ public class Order {
         this.user = user;
     }
 
-    public List<MenuItem> getItemList() {
+    public List<IMenuItem> getItemList() {
         return itemList;
     }
 
-    public void setItemList(List<MenuItem> itemList) {
+    public void setItemList(List<IMenuItem> itemList) {
         this.itemList = itemList;
     }
 
