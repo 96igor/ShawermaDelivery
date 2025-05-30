@@ -1,5 +1,6 @@
 package com.igorjava.shawarmadelivery.data.repoImpls.collectionFrw;
 
+import com.igorjava.shawarmadelivery.domain.model.IMenuItem;
 import com.igorjava.shawarmadelivery.domain.model.MenuItem;
 import com.igorjava.shawarmadelivery.domain.model.MenuSection;
 import com.igorjava.shawarmadelivery.domain.repo.MenuItemRepo;
@@ -11,23 +12,23 @@ import java.util.List;
 @Repository
 public class MenuItemRepoImpl implements MenuItemRepo {
 
-    private final List<MenuItem> items=new ArrayList<>();
+    private final List<IMenuItem> items=new ArrayList<>();
 
     @Override
-    public MenuItem saveMenuItem(MenuItem menuItem) {
+    public IMenuItem saveMenuItem(IMenuItem menuItem) {
         items.add(menuItem);
         return menuItem;
     }
 
     @Override
-    public MenuItem updateMenuItem(MenuItem menuItem) {
+    public IMenuItem updateMenuItem(IMenuItem menuItem) {
         int index=items.indexOf(menuItem);
         if (index != -1) items.set(index,menuItem);
         return menuItem;
     }
 
     @Override
-    public MenuItem getMenuItemById(Long id) {
+    public IMenuItem getMenuItemById(Long id) {
         return items.stream()
                 .filter(menuItem -> menuItem.getId().equals(id))
                 .findFirst()
@@ -35,14 +36,14 @@ public class MenuItemRepoImpl implements MenuItemRepo {
     }
 
     @Override
-    public List<MenuItem> getMenuItemBySection(MenuSection section) {
+    public List<IMenuItem> getMenuItemBySection(MenuSection section) {
         return items.stream()
                 .filter(item-> item.getMenuSection().name().equals(section.name()))
                 .toList();
     }
 
     @Override
-    public void deleteMenuItem(MenuItem menuItem) {
+    public void deleteMenuItem(IMenuItem menuItem) {
         items.remove(menuItem);
     }
 }

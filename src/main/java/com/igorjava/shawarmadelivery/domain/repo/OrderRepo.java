@@ -1,14 +1,12 @@
 package com.igorjava.shawarmadelivery.domain.repo;
 
-import com.igorjava.shawarmadelivery.domain.model.Order;
-import com.igorjava.shawarmadelivery.domain.model.OrderStatus;
-import com.igorjava.shawarmadelivery.domain.model.User;
+import com.igorjava.shawarmadelivery.domain.model.*;
 import java.util.List;
 
 public interface OrderRepo {
-    Order saveOrder(Order order);
-    Order updateOrder(Order order);
-    Order updateOrderStatus(Long orderId, OrderStatus status);
-    List<Order> getOrdersByUser(User user);
-    List<Order> getOrdersByStatus(OrderStatus orderStatus);
+    IOrder saveOrder(IOrder order);
+    IOrder updateOrder(IOrder order);
+    IOrder updateOrderStatus(Long orderId, OrderStatus status);
+    List<IOrder> getOrdersByUser(IUser user);
+    List<IOrder> getOrdersByStatus(OrderStatus orderStatus);
 }

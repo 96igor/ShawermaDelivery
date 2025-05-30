@@ -1,8 +1,6 @@
 package com.igorjava.shawarmadelivery.data.repoImpls.collectionFrw;
 
-import com.igorjava.shawarmadelivery.domain.model.Order;
-import com.igorjava.shawarmadelivery.domain.model.OrderStatus;
-import com.igorjava.shawarmadelivery.domain.model.User;
+import com.igorjava.shawarmadelivery.domain.model.*;
 import com.igorjava.shawarmadelivery.domain.repo.OrderRepo;
 import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
@@ -13,24 +11,24 @@ import java.util.stream.Collectors;
 @Repository
 public class OrderRepoImpl implements OrderRepo {
 
-    private final List<Order> orders=new ArrayList<>();
+    private final List<IOrder> orders=new ArrayList<>();
     private AtomicLong nextId = new AtomicLong(1);
 
     @Override
-    public Order saveOrder(Order order) {
+    public IOrder saveOrder(IOrder order) {
         order.setId(nextId.getAndIncrement());
         orders.add(order);
         return order;
     }
 
     @Override
-    public Order updateOrder(Order order) {
+    public IOrder updateOrder(IOrder order) {
         int index=orders.indexOf(order);
         if (index != -1) orders.set(index, order);
         return order;
     }
 
-    private Order getOrderById(Long id) {
+    private IOrder getOrderById(Long id) {
         return orders.stream()
                 .filter(order -> order.getId().equals(id))
                 .findFirst()
@@ -38,7 +36,7 @@ public class OrderRepoImpl implements OrderRepo {
     }
 
     @Override
-    public Order updateOrderStatus(Long orderId, OrderStatus status) {
+    public IOrder updateOrderStatus(Long orderId, OrderStatus status) {
         var order = getOrderById(orderId);
         order.setStatus(status);
         updateOrder(order);
@@ -46,14 +44,14 @@ public class OrderRepoImpl implements OrderRepo {
     }
 
     @Override
-    public List<Order> getOrdersByUser(User user) {
+    public List<IOrder> getOrdersByUser(IUser user) {
         return orders.stream()
                 .filter(order -> order.getUser().getId().equals(user.getId()))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<Order> getOrdersByStatus(OrderStatus orderStatus) {
+    public List<IOrder> getOrdersByStatus(OrderStatus orderStatus) {
         return orders.stream()
                 .filter(order -> order.getStatus().name().equals(orderStatus.name()))
                 .toList();
