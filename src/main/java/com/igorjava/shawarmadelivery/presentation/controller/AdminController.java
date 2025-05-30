@@ -1,5 +1,6 @@
 package com.igorjava.shawarmadelivery.presentation.controller;
 
+import com.igorjava.shawarmadelivery.domain.model.IOrder;
 import com.igorjava.shawarmadelivery.domain.model.Order;
 import com.igorjava.shawarmadelivery.domain.model.OrderStatus;
 import com.igorjava.shawarmadelivery.presentation.service.OrderService;
@@ -46,7 +47,7 @@ public class AdminController {
     }
 
     @ModelAttribute(name = "newOrders")
-    public List<Order> getNewOrders() {
+    public List<IOrder> getNewOrders() {
         return orderService.getOrdersByStatus(OrderStatus.NEW);
     }
 }

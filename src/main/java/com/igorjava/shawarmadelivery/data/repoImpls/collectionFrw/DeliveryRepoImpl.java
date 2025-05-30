@@ -7,14 +7,17 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 
 @Repository
 public class DeliveryRepoImpl implements DeliveryRepo {
 
     private final List<IDelivery> deliveries = new ArrayList();
+    private final AtomicLong nextId = new AtomicLong(1);
 
     @Override
     public IDelivery saveDelivery(IDelivery delivery) {
+        delivery.setId(nextId.getAndIncrement());
         deliveries.add(delivery);
         return delivery;
     }

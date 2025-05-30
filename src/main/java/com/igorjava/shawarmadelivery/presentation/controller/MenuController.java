@@ -1,6 +1,6 @@
 package com.igorjava.shawarmadelivery.presentation.controller;
 
-import com.igorjava.shawarmadelivery.domain.model.MenuItem;
+import com.igorjava.shawarmadelivery.domain.model.IMenuItem;
 import com.igorjava.shawarmadelivery.domain.model.MenuSection;
 import com.igorjava.shawarmadelivery.presentation.service.MenuItemService;
 import org.springframework.stereotype.Controller;
@@ -23,7 +23,7 @@ public class MenuController {
 
     @GetMapping
     public String showMenu(Model model){
-        Map<String, List<MenuItem>> menuItemsBySection = Map.of(
+        Map<String, List<IMenuItem>> menuItemsBySection = Map.of(
                 "menu.main_menu", service.getMenuItemsBySection(MenuSection.MAIN_MENU),
                 "menu.snacks", service.getMenuItemsBySection(MenuSection.SNACKS),
                 "menu.supplements", service.getMenuItemsBySection(MenuSection.SUPPLEMENTS),

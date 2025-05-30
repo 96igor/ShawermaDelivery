@@ -1,5 +1,6 @@
 package com.igorjava.shawarmadelivery.domain.interactor;
 
+import com.igorjava.shawarmadelivery.domain.model.IMenuItem;
 import com.igorjava.shawarmadelivery.domain.model.MenuItem;
 import com.igorjava.shawarmadelivery.domain.model.MenuSection;
 import com.igorjava.shawarmadelivery.domain.repo.MenuItemRepo;
@@ -14,19 +15,19 @@ public class MenuItemInteractor {
         this.repo = repo;
     }
 
-    public MenuItem saveMenuItem(MenuItem menuItem){
+    public IMenuItem saveMenuItem(IMenuItem menuItem){
          return repo.saveMenuItem(menuItem);
     }
 
-    public MenuItem updateMenuItem(MenuItem menuItem){
+    public IMenuItem updateMenuItem(IMenuItem menuItem){
         return repo.updateMenuItem(menuItem);
     }
 
-    public List<MenuItem> getMenuItemsBySection(MenuSection section){
+    public List<IMenuItem> getMenuItemsBySection(MenuSection section){
         return repo.getMenuItemBySection(section);
     }
 
-    public MenuItem getMenuItemById(Long id){
+    public IMenuItem getMenuItemById(Long id){
         return repo.getMenuItemById(id);
     }
 
