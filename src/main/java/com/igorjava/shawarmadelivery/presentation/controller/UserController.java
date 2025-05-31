@@ -66,20 +66,18 @@ public class UserController {
     public String showLoginForm(
             Model model
     ){
-        model.addAttribute("email", "");
-        model.addAttribute("password", "");
-        return "Login";
+        model.addAttribute("user", new UserDto());
+        return "login";
     }
 
     @PostMapping("/login")
     public String loginUser(
-            @RequestParam String email,
-            @RequestParam String password,
+            @RequestParam IUser userDto,
             Model model
     ){
         try {
-            IUser user = service.getUserByEmail(email);
-            if (authUtils.authenticats(password, user.getPassword())){
+            IUser user = service.getUserByEmail(userDto.getEmail());
+            if (authUtils.authenticats(userDto.getPassword(), user.getPassword())){
                 sessionInfoService.setUserInfo(user);
                 return "redirect:/menu";
             }
