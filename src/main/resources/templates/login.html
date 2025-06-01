@@ -21,7 +21,7 @@
         <div>
             <label for="password" th:text="#{login.password}">Password:</label>
             <input type="password" id="password" name="password" required>
-            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color:red"></span>
         </div>
         <br/>
         <button type="submit" th:text="#{login.submit}">Login</button>

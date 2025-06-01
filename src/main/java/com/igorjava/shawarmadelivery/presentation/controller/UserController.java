@@ -2,6 +2,7 @@ package com.igorjava.shawarmadelivery.presentation.controller;
 
 import com.igorjava.shawarmadelivery.conf.AuthUtils;
 import com.igorjava.shawarmadelivery.domain.model.IUser;
+import com.igorjava.shawarmadelivery.domain.model.User;
 import com.igorjava.shawarmadelivery.presentation.service.SessionInfoService;
 import com.igorjava.shawarmadelivery.presentation.service.UserService;
 import com.igorjava.shawarmadelivery.presentation.service.dto.UserDto;
@@ -34,13 +35,13 @@ public class UserController {
     public String register(
             Model model
     ) {
-        model.addAttribute("user", new UserDto());
+        model.addAttribute("sessionInfoService", sessionInfoService);
         return "register";
     }
 
     @PostMapping("/register")
     public String registerUser(
-            @Valid @ModelAttribute("user") UserDto user,
+            @Valid @ModelAttribute("sessionInfoService") SessionInfoService sessionInfoService,
             BindingResult result,
             Model model
     ) {
@@ -49,15 +50,16 @@ public class UserController {
 //            result.getFieldErrors().forEach(error ->
 //                    log.info("Validation error in field '{}': {}", error.getField(), error.getDefaultMessage())
 //            );
-            model.addAttribute("user", user);
+            model.addAttribute("sessionInfoService", sessionInfoService);
             return "register";
         }
 
-        String encodedPassword= authUtils.encodePassword(user.getPassword());
+        String encodedPassword= authUtils.encodePassword(sessionInfoService.getPassword());
+        IUser user = sessionInfoService.getUser();
         user.setPassword(encodedPassword);
         service.createUser(user);
         log.info("User registered: {}", user);
-        sessionInfoService.setUserInfo(user);
+//        sessionInfoService.setUserInfo(user);
         model.addAttribute("msg", "User registered successfully!");
         return "redirect:/users/login";
     }
@@ -72,9 +74,16 @@ public class UserController {
 
     @PostMapping("/login")
     public String loginUser(
-            @RequestParam IUser userDto,
+            @Valid @ModelAttribute(name = "user") UserDto userDto,
+            BindingResult result,
             Model model
     ){
+
+        if (result.hasErrors()) {
+            model.addAttribute("user", userDto);
+            return "login";
+        }
+
         try {
             IUser user = service.getUserByEmail(userDto.getEmail());
             if (authUtils.authenticats(userDto.getPassword(), user.getPassword())){
