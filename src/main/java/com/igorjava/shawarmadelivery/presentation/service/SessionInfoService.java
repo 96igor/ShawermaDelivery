@@ -33,16 +33,8 @@ public class SessionInfoService {
     @Email(message = "Email should be valid")
     private String email;
     private String telegram;
+    @Size(min = 1, message = "Please, select at least 1 item to place an order.")
     private List<IMenuItem> cart;
-
-//    public void setUserInfo(IUser user) {
-//        setUsername(user.getName());
-//        setPhone(user.getPhone());
-//        setPassword(user.getPassword());
-//        setAddress(user.getAddress());
-//        setEmail(user.getEmail());
-//        setTelegram(user.getTelegram());
-//    }
 
     public BigDecimal getTotalPrice() {
         return cart.stream().map(IMenuItem::getPrice).reduce(BigDecimal.ZERO, BigDecimal::add);

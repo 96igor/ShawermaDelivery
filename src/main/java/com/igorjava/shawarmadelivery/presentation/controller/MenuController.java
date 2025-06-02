@@ -39,8 +39,8 @@ public class MenuController {
 
     @PostMapping("/order")
     public String processOrderForm(
-            @RequestParam List<Long> selectedId,
-            @RequestParam List<Integer> quantities,
+            @RequestParam(required = false) List<Long> selectedId,
+            @RequestParam(required = false) List<Integer> quantities,
             Model model
     ){
         if (selectedId == null || selectedId.isEmpty()) {

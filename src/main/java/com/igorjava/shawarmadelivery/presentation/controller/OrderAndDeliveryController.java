@@ -31,9 +31,6 @@ public class OrderAndDeliveryController {
 
     @GetMapping("/order")
     public String showOrderForm(Model model) {
-        if (sessionInfoService.getCart() == null || sessionInfoService.getCart().isEmpty()) {
-            return "redirect:/menu";
-        }
         model.addAttribute("sessionInfoService", sessionInfoService);
         return "order";
     }
