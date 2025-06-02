@@ -2,9 +2,9 @@ package com.igorjava.shawarmadelivery.presentation.controller;
 
 import com.igorjava.shawarmadelivery.conf.AuthUtils;
 import com.igorjava.shawarmadelivery.domain.model.IUser;
-import com.igorjava.shawarmadelivery.domain.model.User;
 import com.igorjava.shawarmadelivery.presentation.service.SessionInfoService;
 import com.igorjava.shawarmadelivery.presentation.service.UserService;
+import com.igorjava.shawarmadelivery.presentation.service.dto.LoginCredential;
 import com.igorjava.shawarmadelivery.presentation.service.dto.UserDto;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -68,26 +68,25 @@ public class UserController {
     public String showLoginForm(
             Model model
     ){
-        model.addAttribute("user", new UserDto());
+        model.addAttribute("credential", new LoginCredential());
         return "login";
     }
 
     @PostMapping("/login")
     public String loginUser(
-            @Valid @ModelAttribute(name = "user") UserDto userDto,
+            @Valid @ModelAttribute(name = "credential") LoginCredential credential,
             BindingResult result,
             Model model
     ){
 
         if (result.hasErrors()) {
-            model.addAttribute("user", userDto);
+            model.addAttribute("user", credential);
             return "login";
         }
 
         try {
-            IUser user = service.getUserByEmail(userDto.getEmail());
-            if (authUtils.authenticats(userDto.getPassword(), user.getPassword())){
-                sessionInfoService.setUserInfo(user);
+            IUser user = service.getUserByEmail(credential.getEmail());
+            if (authUtils.authenticats(credential.getPassword(), user.getPassword())){
                 return "redirect:/menu";
             }
             model.addAttribute("error", "Invalid email or password");
