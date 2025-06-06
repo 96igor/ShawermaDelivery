@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -33,8 +34,8 @@ public class SessionInfoService {
     @Email(message = "Email should be valid")
     private String email;
     private String telegram;
-    @Size(min = 1, message = "Please, select at least 1 item to place an order.")
-    private List<IMenuItem> cart;
+//    @Size(min = 1, message = "Please, select at least 1 item to place an order.")
+    private List<IMenuItem> cart = new ArrayList<>();
 
     public BigDecimal getTotalPrice() {
         return cart.stream().map(IMenuItem::getPrice).reduce(BigDecimal.ZERO, BigDecimal::add);

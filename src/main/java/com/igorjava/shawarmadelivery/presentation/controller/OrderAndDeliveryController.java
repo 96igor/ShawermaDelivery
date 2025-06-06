@@ -2,11 +2,15 @@ package com.igorjava.shawarmadelivery.presentation.controller;
 
 import com.igorjava.shawarmadelivery.domain.model.*;
 import com.igorjava.shawarmadelivery.presentation.service.*;
+import com.igorjava.shawarmadelivery.presentation.service.dto.OrderDto;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -31,14 +35,24 @@ public class OrderAndDeliveryController {
 
     @GetMapping("/order")
     public String showOrderForm(Model model) {
-        model.addAttribute("sessionInfoService", sessionInfoService);
+        model.addAttribute("orderDto", new OrderDto());
         return "order";
     }
 
     @PostMapping("/order/submit")
-    public String orderSubmit() {
-        log.info("sessionInfoService: {}", sessionInfoService);
+    public String orderSubmit(
+            @Valid @ModelAttribute SessionInfoService sessionInfoService,
+            BindingResult result,
+            Model model
+    ) {
 
+        if (result.hasErrors()) {
+            model.addAttribute("sessionInfoService", sessionInfoService);
+            showOrderForm(model);
+        }
+        log.info("sessionInfoService: {}", sessionInfoService);
+        log.info("userService.getUserByEmail: {}", userService.getUserByEmail(sessionInfoService.getEmail()));
+        log.info("sessionInfoService.getEmail(): {}", sessionInfoService.getEmail());
         IUser user = userService.getUserByEmail(sessionInfoService.getEmail());
         user.setAddress(sessionInfoService.getAddress());
         user.setName(sessionInfoService.getUsername());

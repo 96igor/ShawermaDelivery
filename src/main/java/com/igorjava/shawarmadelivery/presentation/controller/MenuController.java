@@ -4,6 +4,8 @@ import com.igorjava.shawarmadelivery.domain.model.IMenuItem;
 import com.igorjava.shawarmadelivery.domain.model.MenuSection;
 import com.igorjava.shawarmadelivery.presentation.service.MenuItemService;
 import com.igorjava.shawarmadelivery.presentation.service.SessionInfoService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +19,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/menu")
 public class MenuController {
+
+    private static final Logger log = LoggerFactory.getLogger(MenuController.class);
 
     private final MenuItemService menuService;
     private final SessionInfoService sessionInfoService;
@@ -34,6 +38,7 @@ public class MenuController {
                 "menu.supplements", menuService.getMenuItemsBySection(MenuSection.SUPPLEMENTS),
                 "menu.sauces", menuService.getMenuItemsBySection(MenuSection.SAUCES));
         model.addAttribute("menuItemsBySection", menuItemsBySection);
+        log.info("sessionInfoService.getEmail(): {}", sessionInfoService.getEmail());
         return "menu";
     }
 

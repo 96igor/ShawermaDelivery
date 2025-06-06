@@ -5,7 +5,6 @@ import com.igorjava.shawarmadelivery.domain.model.IUser;
 import com.igorjava.shawarmadelivery.presentation.service.SessionInfoService;
 import com.igorjava.shawarmadelivery.presentation.service.UserService;
 import com.igorjava.shawarmadelivery.presentation.service.dto.LoginCredential;
-import com.igorjava.shawarmadelivery.presentation.service.dto.UserDto;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,13 +19,13 @@ public class UserController {
 
     private static final Logger log = LoggerFactory.getLogger(UserController.class);
 
-    private final UserService service;
+    private final UserService userService;
     private final AuthUtils authUtils;
     private final SessionInfoService sessionInfoService;
 
-    public UserController(UserService service, AuthUtils authUtils, SessionInfoService sessionInfoService) {
+    public UserController(UserService userService, AuthUtils authUtils, SessionInfoService sessionInfoService) {
 
-        this.service = service;
+        this.userService = userService;
         this.authUtils = authUtils;
         this.sessionInfoService = sessionInfoService;
     }
@@ -46,10 +45,6 @@ public class UserController {
             Model model
     ) {
         if (result.hasErrors()) {
-//            log.info("ValidationErrors: {}", result.getFieldError());
-//            result.getFieldErrors().forEach(error ->
-//                    log.info("Validation error in field '{}': {}", error.getField(), error.getDefaultMessage())
-//            );
             model.addAttribute("sessionInfoService", sessionInfoService);
             return "register";
         }
@@ -57,9 +52,8 @@ public class UserController {
         String encodedPassword= authUtils.encodePassword(sessionInfoService.getPassword());
         IUser user = sessionInfoService.getUser();
         user.setPassword(encodedPassword);
-        service.createUser(user);
+        userService.createUser(user);
         log.info("User registered: {}", user);
-//        sessionInfoService.setUserInfo(user);
         model.addAttribute("msg", "User registered successfully!");
         return "redirect:/users/login";
     }
@@ -78,6 +72,8 @@ public class UserController {
             BindingResult result,
             Model model
     ){
+        log.info("LOGIN-sessionInfoService.getEmail(): {}", sessionInfoService.getEmail());
+
 
         if (result.hasErrors()) {
             model.addAttribute("user", credential);
@@ -85,8 +81,9 @@ public class UserController {
         }
 
         try {
-            IUser user = service.getUserByEmail(credential.getEmail());
-            if (authUtils.authenticats(credential.getPassword(), user.getPassword())){
+            IUser user = userService.getUserByEmail(credential.getEmail());
+            if (authUtils.authenticats(credential.getPassword(), user.getPassword())) {
+                log.info("sessionInfoService.getEmail(): {}", sessionInfoService.getEmail());
                 return "redirect:/menu";
             }
             model.addAttribute("error", "Invalid email or password");
@@ -101,8 +98,14 @@ public class UserController {
     public String deleteUser(
             @RequestParam String email
     ){
-            IUser user = service.getUserByEmail(email);
-            service.deleteUser(user);
-                return "redirect:/users/register";
+            IUser user = userService.getUserByEmail(email);
+            userService.deleteUser(user);
+            return "redirect:/users/register";
     }
+
+//    @ModelAttribute(name = "sessionInfoService")
+//    public SessionInfoService sessionInfoService() {
+//        return sessionInfoService;
+//    }
+
 }
