@@ -5,6 +5,7 @@ import com.igorjava.shawarmadelivery.domain.model.IUser;
 import com.igorjava.shawarmadelivery.presentation.service.SessionInfoService;
 import com.igorjava.shawarmadelivery.presentation.service.UserService;
 import com.igorjava.shawarmadelivery.presentation.service.dto.LoginCredential;
+import com.igorjava.shawarmadelivery.presentation.service.dto.UserDto;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,22 +35,26 @@ public class UserController {
     public String register(
             Model model
     ) {
-        model.addAttribute("sessionInfoService", sessionInfoService);
+        model.addAttribute("userDto", new UserDto());
         return "register";
     }
 
     @PostMapping("/register")
     public String registerUser(
-            @Valid @ModelAttribute("sessionInfoService") SessionInfoService sessionInfoService,
+            @Valid @ModelAttribute("userDto") UserDto userDto,
             BindingResult result,
             Model model
     ) {
         if (result.hasErrors()) {
-            model.addAttribute("sessionInfoService", sessionInfoService);
+            model.addAttribute("userDto", userDto);
             return "register";
         }
 
-        String encodedPassword= authUtils.encodePassword(sessionInfoService.getPassword());
+        String encodedPassword = authUtils.encodePassword(userDto.getPassword());
+        userDto.setPassword(encodedPassword);
+        userService.createUser(userDto);
+        sessionInfoService.setUserFields(userDto);
+
         IUser user = sessionInfoService.getUser();
         user.setPassword(encodedPassword);
         userService.createUser(user);

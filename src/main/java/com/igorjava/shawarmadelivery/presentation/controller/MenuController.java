@@ -4,6 +4,7 @@ import com.igorjava.shawarmadelivery.domain.model.IMenuItem;
 import com.igorjava.shawarmadelivery.domain.model.MenuSection;
 import com.igorjava.shawarmadelivery.presentation.service.MenuItemService;
 import com.igorjava.shawarmadelivery.presentation.service.SessionInfoService;
+import com.igorjava.shawarmadelivery.presentation.service.dto.OrderDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -61,6 +62,7 @@ public class MenuController {
         }
         sessionInfoService.setCart(selectedMenuItems);
         model.addAttribute("sessionInfoService", sessionInfoService);
+        model.addAttribute("orderDto", new OrderDto());
         return "order";
     }
 }

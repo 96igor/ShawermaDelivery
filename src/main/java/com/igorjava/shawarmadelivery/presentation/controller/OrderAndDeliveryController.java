@@ -36,12 +36,13 @@ public class OrderAndDeliveryController {
     @GetMapping("/order")
     public String showOrderForm(Model model) {
         model.addAttribute("orderDto", new OrderDto());
+        model.addAttribute("sessionInfoService", sessionInfoService);
         return "order";
     }
 
     @PostMapping("/order/submit")
     public String orderSubmit(
-            @Valid @ModelAttribute SessionInfoService sessionInfoService,
+            @Valid @ModelAttribute("orderDto") OrderDto orderDto,
             BindingResult result,
             Model model
     ) {
