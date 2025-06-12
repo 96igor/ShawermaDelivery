@@ -26,7 +26,10 @@ public class OrderAndDeliveryController {
     private final UserService userService;
     private final SessionInfoService sessionInfoService;
 
-    public OrderAndDeliveryController(OrderService orderService, DeliveryService deliveryService, UserService userService, SessionInfoService sessionInfoService) {
+    public OrderAndDeliveryController(OrderService orderService,
+                                      DeliveryService deliveryService,
+                                      UserService userService,
+                                      SessionInfoService sessionInfoService) {
         this.orderService = orderService;
         this.deliveryService = deliveryService;
         this.userService = userService;
@@ -35,7 +38,10 @@ public class OrderAndDeliveryController {
 
     @GetMapping("/order")
     public String showOrderForm(Model model) {
-        model.addAttribute("orderDto", new OrderDto());
+        model.addAttribute("orderDto", new OrderDto(
+                sessionInfoService.getUsername(),
+                sessionInfoService.getAddress(),
+                sessionInfoService.getPhone()));
         model.addAttribute("sessionInfoService", sessionInfoService);
         return "order";
     }
@@ -49,11 +55,16 @@ public class OrderAndDeliveryController {
 
         if (result.hasErrors()) {
             model.addAttribute("sessionInfoService", sessionInfoService);
-            showOrderForm(model);
+            model.addAttribute("orderDto", orderDto);
+            return "order";
         }
-        log.info("sessionInfoService: {}", sessionInfoService);
-        log.info("userService.getUserByEmail: {}", userService.getUserByEmail(sessionInfoService.getEmail()));
-        log.info("sessionInfoService.getEmail(): {}", sessionInfoService.getEmail());
+
+        sessionInfoService.setInfoFromOrderDto(orderDto);
+
+//        log.info("sessionInfoService: {}", sessionInfoService);
+//        log.info("userService.getUserByEmail: {}", userService.getUserByEmail(sessionInfoService.getEmail()));
+//        log.info("sessionInfoService.getEmail(): {}", sessionInfoService.getEmail());
+
         IUser user = userService.getUserByEmail(sessionInfoService.getEmail());
         user.setAddress(sessionInfoService.getAddress());
         user.setName(sessionInfoService.getUsername());

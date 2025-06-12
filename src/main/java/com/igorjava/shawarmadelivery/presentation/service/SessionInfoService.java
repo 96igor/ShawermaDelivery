@@ -3,6 +3,7 @@ package com.igorjava.shawarmadelivery.presentation.service;
 import com.igorjava.shawarmadelivery.domain.model.IMenuItem;
 import com.igorjava.shawarmadelivery.domain.model.IUser;
 import com.igorjava.shawarmadelivery.domain.model.User;
+import com.igorjava.shawarmadelivery.presentation.service.dto.OrderDto;
 import com.igorjava.shawarmadelivery.presentation.service.dto.UserDto;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -105,6 +106,12 @@ public class SessionInfoService {
         this.email = userDto.getEmail();
         this.telegram = userDto.getTelegram();
 
+    }
+
+    public void setInfoFromOrderDto(OrderDto orderDto) {
+        username = orderDto.getUsername();
+        phone = orderDto.getPhone();
+        address = orderDto.getAddress();
     }
 }
 

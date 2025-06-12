@@ -61,8 +61,8 @@ public class MenuController {
             }
         }
         sessionInfoService.setCart(selectedMenuItems);
-        model.addAttribute("sessionInfoService", sessionInfoService);
-        model.addAttribute("orderDto", new OrderDto());
-        return "order";
+//        model.addAttribute("sessionInfoService", sessionInfoService);
+//        model.addAttribute("orderDto", new OrderDto());
+        return "redirect:/order";
     }
 }

@@ -13,4 +13,45 @@ public class OrderDto {
     @NotBlank(message = "Phone number required")
     @Pattern(regexp = "^\\+?\\d+$", message = "Only digits for phone number")
     private String phone;
+
+//    public OrderDto() {}
+
+    public OrderDto(String username, String address, String phone) {
+        this.username = username;
+        this.address = address;
+        this.phone = phone;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderDto{" +
+                "username='" + username + '\'' +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
+                '}';
+    }
 }

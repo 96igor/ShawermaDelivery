@@ -31,7 +31,7 @@
     </div>
 
     <h2 th:text="#{order.enter_delivery_data}">Please, enter data for delivery:</h2>
-    <form th:action="@{/order/submit}" th:method="post" th:object="${orderDto}">
+    <form th:action="@{/order/submit}" method="post" th:object="${orderDto}">
         <div>
             <label for="username" th:text="#{order.username}">Username:</label>
             <input type="text" id="username" name="username" th:field="*{username}"/>

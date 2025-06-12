@@ -55,10 +55,8 @@ public class UserController {
         userService.createUser(userDto);
         sessionInfoService.setUserFields(userDto);
 
-        IUser user = sessionInfoService.getUser();
-        user.setPassword(encodedPassword);
-        userService.createUser(user);
-        log.info("User registered: {}", user);
+        log.info("UserDto POST registeredUser: {}", userDto);
+        log.info("sessionInfoService POST registeredUser: {}", sessionInfoService);
         model.addAttribute("msg", "User registered successfully!");
         return "redirect:/users/login";
     }
@@ -77,9 +75,6 @@ public class UserController {
             BindingResult result,
             Model model
     ){
-        log.info("LOGIN-sessionInfoService.getEmail(): {}", sessionInfoService.getEmail());
-
-
         if (result.hasErrors()) {
             model.addAttribute("user", credential);
             return "login";
@@ -107,10 +102,4 @@ public class UserController {
             userService.deleteUser(user);
             return "redirect:/users/register";
     }
-
-//    @ModelAttribute(name = "sessionInfoService")
-//    public SessionInfoService sessionInfoService() {
-//        return sessionInfoService;
-//    }
-
 }
