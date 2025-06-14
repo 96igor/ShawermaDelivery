@@ -1,6 +1,6 @@
 package com.igorjava.shawarmadelivery.presentation.service;
 
-import com.igorjava.shawarmadelivery.domain.interactor.OrderInteractor;
+import com.igorjava.shawarmadelivery.domain.interractor.OrderInteractor;
 import com.igorjava.shawarmadelivery.domain.repo.OrderRepo;
 import org.springframework.stereotype.Service;
 
