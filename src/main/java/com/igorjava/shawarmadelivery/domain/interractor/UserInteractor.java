@@ -11,16 +11,15 @@ public class UserInteractor {
         this.repo = userRepo;
     }
 
-    public UserInteractor(UserRepo userRepo) {
-        this.repo=userRepo;
-    }
+    public UserInteractor(UserRepo userRepo) { this.repo=userRepo; }
 
     public IUser createUser(IUser user){
         return repo.saveUser(user);
     }
 
-    public void deleteUser(IUser user) { repo.deleteUser(user);
-    }
+    public void deleteUser(IUser user) { repo.deleteUser(user); }
+
+    public void deleteUserByEmail(String email) { repo.deleteUserByEmail(email); }
 
     public IUser getUserByEmail(String email){
         return repo.getUserByEmail(email);

@@ -11,26 +11,26 @@ import javax.sql.DataSource;
 @Configuration
 public class DatabaseConfig {
 
-    @Value("${spring.datasource.url}")
-    public String url;
-
-    @Value("${spring.datasource.username}")
-    public String username;
-
-    @Value("${spring.datasource.password}")
-    public String password;
-
-    @Value("${spring.datasource.driver-class-name}")
-    public String driverClassName;
-
-    @Bean
-    public DataSource dataSource() {
-        return DataSourceBuilder.create()
-                .url(url)
-                .username(username)
-                .password(password)
-                .driverClassName(driverClassName)
-                .type(DriverManagerDataSource.class)
-                .build();
-    }
+//    @Value("${spring.datasource.url}")
+//    public String url;
+//
+//    @Value("${spring.datasource.username}")
+//    public String username;
+//
+//    @Value("${spring.datasource.password}")
+//    public String password;
+//
+//    @Value("${spring.datasource.driver-class-name}")
+//    public String driverClassName;
+//
+//    @Bean
+//    public DataSource dataSource() {
+//        return DataSourceBuilder.create()
+//                .url(url)
+//                .username(username)
+//                .password(password)
+//                .driverClassName(driverClassName)
+//                .type(DriverManagerDataSource.class)
+//                .build();
+//    }
 }

@@ -6,10 +6,7 @@ import com.igorjava.shawarmadelivery.domain.repo.UserRepo;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 @Repository("URwS")
 public class UserRepoImpl implements UserRepo {
@@ -22,16 +19,17 @@ public class UserRepoImpl implements UserRepo {
 
     @Override
     public IUser saveUser(IUser user) {
-
+        String sql = "INSERT INTO users(name, email, password, telegram, phone, address) VALUES(?, ?, ?, ?, ?, ?);";
         try (Connection connection = dataSource.getConnection();
-             Statement statement = connection.createStatement()) {
-            String sql="INSERT INTO users(name, email, password, telegram, phone, address) VALUES(" +
-                "'"+user.getName()+"','"+user.getEmail()+"','"+ user.getPassword()+"','"+
-                    user.getTelegram()+"','"+user.getPhone()+"','"+user.getAddress()+"'" +
-                    ");";
-            statement.executeUpdate(sql);
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, user.getName());
+            ps.setString(2, user.getEmail());
+            ps.setString(3, user.getPassword());
+            ps.setString(4, user.getTelegram());
+            ps.setString(5, user.getPhone());
+            ps.setString(6, user.getAddress());
+            ps.executeUpdate();
             return user;
-
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
@@ -40,11 +38,23 @@ public class UserRepoImpl implements UserRepo {
 
     @Override
     public void deleteUser(IUser user) {
-
+        String sql = "DELETE FROM users WHERE id = ?";
         try (Connection connection = dataSource.getConnection();
-             Statement statement = connection.createStatement()) {
-             String sql = "DELETE FROM users WHERE id="+user.getId();
-            statement.executeUpdate(sql);
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setLong(1, user.getId());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deleteUserByEmail(String email) {
+        String sql = "DELETE FROM users WHERE email = ?";
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, email);
+            ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -52,11 +62,11 @@ public class UserRepoImpl implements UserRepo {
 
     @Override
     public IUser getUserByEmail(String email) {
-
+        String sql = "SELECT * FROM users WHERE email = ?";
         try (Connection connection = dataSource.getConnection();
-             Statement statement = connection.createStatement()) {
-            String sql = "SELECT * FROM users WHERE email ='"+email+"';";
-            ResultSet rs = statement.executeQuery(sql);
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
             User user = new User();
             while (rs.next()) {
                 user.setId(rs.getLong("id"));
@@ -75,18 +85,24 @@ public class UserRepoImpl implements UserRepo {
 
     @Override
     public IUser updateUser(IUser user) {
-
+        String sql = "UPDATE users SET " +
+                " name= ?, " +
+                "email= ?, " +
+                "password= ?, " +
+                "telegram= ?, " +
+                "phone= ?, " +
+                "address= ?, " +
+                "WHERE id= ?";
         try (Connection connection = dataSource.getConnection();
-             Statement statement = connection.createStatement()) {
-            String sql = "UPDATE users SET " +
-                    " name='" + user.getName() + "', " +
-                    "email='" + user.getEmail() + "', " +
-                    "password='" + user.getPassword() + "', " +
-                    "telegram='" + user.getTelegram() + "', " +
-                    "phone='" + user.getPhone() + "', " +
-                    "address='" + user.getAddress() + "', " +
-                    "WHERE id=" + user.getId() + ";";
-            statement.executeUpdate(sql);
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, user.getName());
+            ps.setString(2, user.getEmail());
+            ps.setString(3, user.getPassword());
+            ps.setString(4, user.getTelegram());
+            ps.setString(5, user.getPhone());
+            ps.setString(6, user.getAddress());
+            ps.setLong(7, user.getId());
+            ps.executeUpdate();
             return user;
         } catch (SQLException e) {
             return null;
